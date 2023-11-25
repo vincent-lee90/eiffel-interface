@@ -66,7 +66,7 @@ const buy = async (exchangeCard: any) => {
         if (res.isSuccessful) {
             showNotify({ type: "success", message: "购买成功" })
             const cardId = res.data
-            exCards.value.filter((card) => {
+            exCards.value = exCards.value.filter((card) => {
                 return card.cardId != cardId
             })
         } else {

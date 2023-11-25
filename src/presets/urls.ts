@@ -2,7 +2,7 @@ export default class Urls {
     static register = `users/register`
     static hashrateInfo = `users/hashrateInfo`
     static rewardInfo = `users/rewardInfo`
-    static mintStatic = `mint/getStatics`
+    static mintStatic = `mint/getStatistics`
     static mint = `mint/selfMint`
     static myCards = `users/myCards`
     static split = `split/split-card`
@@ -11,5 +11,5 @@ export default class Urls {
     static buy = `exchange/buy`
     static exchangeList = `exchange/list`
     static playGame = `game/play`
-
+    static myExchangeList=`exchange/myList`
 }

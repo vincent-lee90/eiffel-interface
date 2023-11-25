@@ -6,9 +6,9 @@ interface ApiResponse {
     data: any
     message: any
 }
-export const useRegister = async (address: string, inviter: string | null): Promise<ApiResponse> => {
+export const useRegister = async (address: string, inviter: string | null, signature: string): Promise<ApiResponse> => {
     const res = await axios.post(Urls.register, {
-        address, inviter
+        address, inviter, signature
     })
     return (res as unknown as ApiResponse)
 }
@@ -44,16 +44,24 @@ export const useExchangeList = async (pageIndex: number, pageSize: number): Prom
     })
     return res as unknown as ApiResponse
 }
-export const useSellInfo = async (): Promise<ApiResponse> => {
-
+export const useMyExchangeList = async (address: string) => {
+    const res = await axios.get(Urls.myExchangeList, { params: { address } })
+    res.data.cards = res.data.cards.map((el: any) => {
+        el.worth = ethers.formatEther(el.worth)
+        return el
+    })
+    return res as unknown as ApiResponse
 }
+/* export const useSellInfo = async (): Promise<ApiResponse> => {
+
+} */
 export const useSell = async (seller: string, cardId: number): Promise<ApiResponse> => {
     const res = await axios.post(Urls.sell, { seller, cardId })
     return res as unknown as ApiResponse
 }
-export const useBuyInfo = async (): Promise<ApiResponse> => {
+/* export const useBuyInfo = async (): Promise<ApiResponse> => {
 
-}
+} */
 export const useBuy = async (buyer: string, cardId: number): Promise<ApiResponse> => {
     const res = await axios.post(Urls.buy, { buyer, cardId })
     return res as unknown as ApiResponse
@@ -69,5 +77,13 @@ export const useHashrateInfo = async (address: string): Promise<ApiResponse> => 
 }
 export const useRewardInfo = async (address: string): Promise<ApiResponse> => {
     const res = await axios.get(Urls.rewardInfo, { params: { address } })
+    let { exAmount, myCoRewardAmount, myGroupRewardAmount, teamCoRewardAmount, teamGroupRewardAmount } = res.data
+    exAmount = ethers.formatEther(exAmount)
+    myCoRewardAmount = ethers.formatEther(myCoRewardAmount)
+    myGroupRewardAmount = ethers.formatEther(myGroupRewardAmount)
+    teamCoRewardAmount = ethers.formatEther(teamCoRewardAmount)
+    teamGroupRewardAmount = ethers.formatEther(teamGroupRewardAmount)
+
+    res.data = { exAmount, myCoRewardAmount, myGroupRewardAmount, teamCoRewardAmount, teamGroupRewardAmount }
     return res as unknown as ApiResponse
 }

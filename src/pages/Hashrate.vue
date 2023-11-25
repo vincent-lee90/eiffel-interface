@@ -18,8 +18,7 @@
                 <van-rolling-text :start-num="0" :target-num="availableAmount"></van-rolling-text>
             </div>
         </div>
-        <van-divider />
-        <div class="text-center mt-8">
+        <div class="text-center mt-16">
             <van-button type="primary" square class="w-1/3">领取释放</van-button>
         </div>
     </div>

@@ -6,15 +6,22 @@
             </div>
         </div>
         <div class="w-full h-[62vh] overflow-y-auto border border-color2nd border-solid py-2 px-2 rounded-2xl">
-            <CardList @on-select-card="handleSelectCard" ref="cardListRef" />
+            <div v-if="activeTab == 'myCards'">
+                <CardList @on-select-card="handleSelectCard" ref="cardListRef" />
+            </div>
+            <div v-else>
+                <ExCardsList />
+            </div>
         </div>
-        <div class="mt-12 text-center">
+
+        <div class="mt-12 text-center" v-if="activeTab == 'myCards'">
             <van-button type="primary" square class="w-[200px]" @click="sellCard">出售选中</van-button>
         </div>
     </div>
 </template>
 <script setup lang="ts">
 import CardList from "@/components/cards-list.vue"
+import ExCardsList from "@/components/ex-cards-list.vue";
 import { ref } from "vue"
 import { useSell } from "@/hooks/useApi";
 import { store } from "@/hooks/store"
@@ -40,6 +47,7 @@ const sellCard = async () => {
         }
         store.isLoading = false
     } catch (e) {
+        store.isLoading = false
         showNotify({ type: "danger", message: "未知错误" })
         console.log(e)
     }

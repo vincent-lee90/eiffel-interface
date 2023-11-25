@@ -28,16 +28,15 @@ import { watch, computed } from "vue";
 import { store } from "@/hooks/store"
 const isShowNavTop = computed(() => {
     const name = useRoute().name
-    const includeNames = ["index", "exchange", "split", "mint", "game","hashrate"]
+    const includeNames = ["index", "exchange", "split", "mint", "game", "hashrate","myCards"]
     return includeNames.indexOf((name as string)) > -1
 })
 const register = () => {
-    useRegister(store.account, store.inviter)
+    useRegister(store.account, store.inviter, store.signHash)
 }
 const sign = async () => {
     const hash = await useSign(store.account)
     store.signHash = hash
-    console.log(hash)
     register()
 }
 watch(() => {
@@ -48,6 +47,4 @@ watch(() => {
     }
 })
 </script>
-<style scoped>
-
-</style>
+<style scoped></style>
