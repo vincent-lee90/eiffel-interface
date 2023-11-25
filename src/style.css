@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+:root:root {
+    --van-button-plain-background: transparent;
+    --van-button-default-color: white;
+    --van-button-primary-background: #FFCE4E;
+    --van-button-primary-border-color: #FFCE4E;
+}
+
+.van-button--primary {
+    color: #000 !important;
+}
+
+body {
+    background: radial-gradient(circle at top right, rgba(37, 25, 40) 5%, rgb(60, 26, 42, 1) 40%);
+    color: #fff;
+    font-size: 14px;
+}
+
+img {
+    display: block;
+}
+
+div {
+    box-sizing: border-box;
+}
+
+.myCards-contrainer .van-list__finished-text,
+.myCards-contrainer .van-list__loading,
+.exchange-container .van-list__finished-text,
+.exchange-container .van-list__loading {
+    grid-column: span 2;
+}
+
+.game-container .notice-swipe {
+    height: 40px;
+    line-height: 40px;
+}
