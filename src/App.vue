@@ -10,7 +10,7 @@
         <div>
             <NavTop v-show="isShowNavTop" />
         </div>
-        <div class="px-2 pt-[60px] pb-[62px]">
+        <div class="">
             <router-view></router-view>
         </div>
         <div>
@@ -24,14 +24,19 @@ import MainMenu from "@/components/main-menu.vue"
 import { useRoute } from "vue-router"
 import { useSign } from "./hooks/useEiffel";
 import { useRegister } from "./hooks/useApi"
+import { useResolveSearchParams } from "@/hooks/useUtils"
 import { watch, computed } from "vue";
 import { store } from "@/hooks/store"
 const isShowNavTop = computed(() => {
     const name = useRoute().name
-    const includeNames = ["index", "exchange", "split", "mint", "game", "hashrate","myCards"]
+    const includeNames = ["index", "exchange", "split", "mint", "game", "hashrate", "myCards"]
     return includeNames.indexOf((name as string)) > -1
 })
 const register = () => {
+    const params = useResolveSearchParams()
+    if (params.inviter) {
+        store.inviter = params.inviter
+    }
     useRegister(store.account, store.inviter, store.signHash)
 }
 const sign = async () => {

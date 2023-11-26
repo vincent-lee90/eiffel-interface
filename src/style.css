@@ -48,3 +48,12 @@ div {
     height: 40px;
     line-height: 40px;
 }
+
+.van-dialog,
+.van-dialog button {
+    background: rgb(28, 28, 30) !important;
+}
+
+.van-dialog button::after {
+    border-color: transparent !important;
+}

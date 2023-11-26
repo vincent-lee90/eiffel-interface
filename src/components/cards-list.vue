@@ -3,7 +3,6 @@
         <van-list class="grid grid-cols-2 gap-x-2 gap-y-4" v-model:loading="isLoading" :finished="isLastPage"
             finished-text="没有更多了" @load="getMyCards">
             <van-cell v-for="card in cards" class="bg-white pb-4 pt-2 rounded-md" @click="selectCard(card)">
-
                 <div class="flex justify-between items-center mb-2 px-2">
                     <div class="text-slate-400">#{{ card.cardId }}</div>
                     <div class="flex justify-end items-center">
@@ -39,10 +38,12 @@ const selectCard = (card: any) => {
     const cardId = card.cardId
     if (cardId == selectedCard.value) {
         selectedCard.value = ''
+        emits("onSelectCard", null)
     } else {
         selectedCard.value = card.cardId
+        emits("onSelectCard", card)
     }
-    emits("onSelectCard", card)
+
 }
 const init = () => {
     cards.value = []

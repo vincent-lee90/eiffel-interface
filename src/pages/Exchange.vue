@@ -1,5 +1,5 @@
 <template>
-    <div class="exchange-container">
+    <div class="exchange-container px-2 pt-[60px] pb-[62px]">
         <div class="py-4">
             Live Auctions
         </div>

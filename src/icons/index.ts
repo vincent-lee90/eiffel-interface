@@ -11,6 +11,7 @@ import IconHashrate from "@/icons/IconHashrate.vue"
 import IconReward from "@/icons/IconReward.vue"
 import IconCard from "@/icons/IconCard.vue"
 import IconCopy from "@/icons/IconCopy.vue"
+import IconCurveArrow from "./IconCurveArrow.vue"
 export {
-    IconHome, IconGame, IconMint, IconNFT, IconSplit, IconMore, IconUSDT, IconTime, IconChecked, IconHashrate, IconReward, IconCard, IconCopy
+    IconHome, IconGame, IconMint, IconNFT, IconSplit, IconMore, IconUSDT, IconTime, IconChecked, IconHashrate, IconReward, IconCard, IconCopy, IconCurveArrow
 }

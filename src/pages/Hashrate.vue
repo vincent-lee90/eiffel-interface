@@ -1,21 +1,21 @@
 <template>
-    <div>
+    <div class="px-2 pt-[60px] pb-[62px]">
         <div class="py-4">
             <div>当前算力</div>
-            <div class="text-right"><van-rolling-text :start-num="0.00" :target-num="hashrate"></van-rolling-text></div>
+            <div class="text-right">{{ hashrate }}</div>
         </div>
         <van-divider />
         <div class="py-4">
             <div>总释放</div>
             <div class="text-right">
-                <van-rolling-text :start-num="0" :target-num="mintTotalAmount"></van-rolling-text>
+                {{ mintTotalAmount }}
             </div>
         </div>
         <van-divider />
         <div class="py-4">
             <div>当前释放</div>
             <div class="text-right">
-                <van-rolling-text :start-num="0" :target-num="availableAmount"></van-rolling-text>
+                {{ availableAmount }}
             </div>
         </div>
         <div class="text-center mt-16">
@@ -33,9 +33,9 @@ const mintTotalAmount = ref(0)
 const getHashrateInfo = async () => {
     const res = await useHashrateInfo(store.account)
     const data = res.data
-    hashrate.value = parseInt(data.hashrate)
-    availableAmount.value = parseInt(data.availableAmount)
-    mintTotalAmount.value = parseInt(data.mintTotalAmount)
+    hashrate.value = data.hashrate
+    availableAmount.value = data.availableAmount
+    mintTotalAmount.value = data.mintTotalAmount
 
 }
 onMounted(() => {

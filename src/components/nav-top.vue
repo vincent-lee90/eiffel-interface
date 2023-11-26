@@ -1,5 +1,5 @@
 <template>
-    <div class="fixed left-0 top-0 w-full  flex items-center justify-between px-2 py-4">
+    <div class="fixed left-0 top-0 w-full  flex items-center justify-between px-2 py-4 backdrop-blur shadow-lg h-[60px]">
         <div>Eiffel</div>
         <div>
             <ConnectWallet />

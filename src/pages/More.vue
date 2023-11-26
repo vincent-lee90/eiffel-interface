@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="px-2 pt-[60px] pb-[62px]">
         <div class="h-[30vh] flex justify-center items-center">
             <div>
                 <Avatar />
@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="mt-16">
-            <van-button class="w-full" plain>
+            <van-button class="w-full" plain @click="copyInviteUrl" id="copyToClipboard">
                 <div class="flex justify-center items-center bg-transparent"><span class="mr-4">邀请好友</span>
                     <IconCopy class="w-[30px] h-[30px] fill-white" />
                 </div>
@@ -36,10 +36,36 @@
 import Avatar from "@/components/avatar.vue"
 import { IconMint, IconCard, IconHashrate, IconReward, IconCopy } from "@/icons"
 import { useRouter } from "vue-router"
+import { store } from "@/hooks/store"
+import { computed, onBeforeUnmount } from "vue"
+import ClipboardJS from 'clipboard'
+import { showSuccessToast, showFailToast } from 'vant';
+
+
 const router = useRouter()
 const goTo = (n: string) => {
     router.push({ name: n })
 }
+let clipboard: any = null
+const inviteUrl = computed(() => {
+    return `${window.location.origin}${window.location.pathname}?inviter=${store.account}`
+})
+const copyInviteUrl = () => {
+    clipboard && clipboard.destroy()
+    clipboard = new ClipboardJS('#copyToClipboard', {
+        text: () => { return inviteUrl.value }
+    })
+    clipboard.on('success', () => {
+        showSuccessToast(`邀请链接已生成`);
+    })
+    clipboard.on('error', () => {
+        showFailToast('链接生成失败');
+    })
+}
+onBeforeUnmount(() => {
+    // 销毁 ClipboardJS
+    clipboard && clipboard.destroy()
+})
 </script>
 <style scoped>
 .icon {

@@ -1,25 +1,26 @@
 <template>
     <div class="text-center">
-        <div id="avatar"></div>
-        <div class="mt-8">{{  store.account.substring(0, 7) + '...' + store.account.substring(store.account.length - 5, store.account.length) }}</div>
+        <div id="avatar">
+            <img class="w-[100px] h-[100px] rounded-full" :src="imgUrl">
+            <div class="mt-8">{{ store.account.substring(0, 7) + '...' + store.account.substring(store.account.length - 5,
+                store.account.length) }}</div>
+        </div>
     </div>
 </template>
 <script setup lang="ts">
-import { onMounted, watch } from 'vue';
+import { onMounted, watch, ref } from 'vue';
 import { store } from "@/hooks/store"
-const Jazzicon = require('jazzicon');
-const diameter = 100
-
+//@ts-ignore
+import Identicon from 'identicon.js';
+const imgUrl = ref(``)
 const initAvatar = () => {
-    const seed = parseInt(store.account.slice(2, 10), 16)
-    const _avatar = Jazzicon(diameter, seed)
-    const container = document.querySelector("#avatar") as Element
-    const firstChild = container.firstChild
-    firstChild && container.removeChild(firstChild)
-    container.appendChild(_avatar)
+    const data = new Identicon(store.account, 100).toString();
+    imgUrl.value = `data:image/png;base64,${data}`
 }
 onMounted(() => {
-    initAvatar()
+    if (store.account) {
+        initAvatar()
+    }
 })
 watch(() => {
     return store.account

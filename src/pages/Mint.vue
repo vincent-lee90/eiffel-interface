@@ -1,5 +1,5 @@
 <template>
-    <div class="pt-32">
+    <div class="pt-32 px-2 pt-[60px] pb-[62px]">
         <div>
             <van-radio-group class="flex flex-col gap-4 items-center" v-model="selectType">
                 <van-radio name="1">
@@ -29,8 +29,11 @@
             </van-radio-group>
         </div>
         <div class="mt-16 text-center">
-            <van-button type="primary" class="w-[200px]" square block @click="mint">开始铸造</van-button>
+            <van-button type="primary" class="w-[200px]" square block @click="toConfirmMint">开始铸造</van-button>
         </div>
+        <van-dialog v-model:show="isShowConfirm" show-cancel-button @confirm="mint">
+            <div class="py-8 px-4">是否确定铸造？</div>
+        </van-dialog>
     </div>
 </template>
 <script setup lang="ts">
@@ -39,6 +42,7 @@ import { IconUSDT } from "@/icons";
 import { showNotify } from "vant"
 import { useMintStatics, useMint } from "@/hooks/useApi";
 import { store } from "@/hooks/store";
+const isShowConfirm = ref(false)
 const selectType = ref('1')
 const type1Amount = ref(0)
 const type2Amount = ref(0)
@@ -50,6 +54,9 @@ const getMintStatics = async () => {
     type2Amount.value = res.data.second
     type3Amount.value = res.data.third
     type4Amount.value = res.data.fourth
+}
+const toConfirmMint = () => {
+    isShowConfirm.value = true
 }
 const mint = async () => {
     try {
