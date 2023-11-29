@@ -26,7 +26,6 @@
 import NavTop from "@/components/nav-top.vue";
 import MainMenu from "@/components/main-menu.vue"
 import { useRoute } from "vue-router"
-import { useSign } from "./hooks/useEiffelCore";
 import { useRegister } from "./hooks/useApi"
 import { useResolveSearchParams } from "@/hooks/useUtils"
 import { watch, computed } from "vue";

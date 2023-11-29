@@ -1,4 +1,4 @@
-import { rpc, EiffelCore } from "@/presets/constants"
+import { EiffelCore } from "@/presets/constants"
 import EiffelCoreABI from "@/presets/abis/eiffelCore.json"
 import { ethers } from "ethers"
 export const useSign = async (account: string) => {

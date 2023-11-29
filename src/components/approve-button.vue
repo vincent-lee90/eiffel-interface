@@ -3,7 +3,7 @@
 </template>
 <script setup lang="ts">
 import { maximumAllowance } from '@/presets/constants'
-import { useApprove } from '@/hooks/useERC20';
+import { useApprove } from '@/hooks/useErc20';
 import { showNotify } from "vant"
 import { computed } from 'vue'
 import { store } from '@/hooks/store';

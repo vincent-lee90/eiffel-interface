@@ -4,9 +4,9 @@ export const USDT = "0x175bfeFc1252F752c839246a24ADbAF39B69F59a"
 export const rpc = "https://data-seed-prebsc-1-s1.bnbchain.org:8545"
 export const Pair = "0xF90F6173ceC7356C75F43d8BB91bF4fd96F36B46"
 export const explore = "https://testnet.bscscan.com"
-export const host = "http://localhost:3000/"
 export const maximumAllowance = "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
-/* export const host = "http://159.75.179.49:3001/" */
+/* export const host = "http://localhost:3000/" */
+ export const host = "http://159.75.179.49:3001/"
 
 /* const AMSNFTCore = "0x8039270004B6eDaA32057afFfE380c3659B0182C"
 const AMSNFTMint = "0x84De1172A3F0CB408ca89B269c08DFbA0D5A1336"

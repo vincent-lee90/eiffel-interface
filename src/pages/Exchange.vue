@@ -80,7 +80,7 @@ import { store, useCloseLoading, useShowLoading } from "@/hooks/store";
 import { showNotify, showToast } from "vant"
 import { usePayForBuy } from "@/hooks/useEiffelCore";
 import { EiffelCore, USDT, maximumAllowance } from "@/presets/constants";
-import { useApprove, useCheckAllowance } from "@/hooks/useERC20";
+import { useApprove, useCheckAllowance } from "@/hooks/useErc20";
 const exCards = ref<any[]>([])
 let pageIndex = 1
 const pageSize = 10
