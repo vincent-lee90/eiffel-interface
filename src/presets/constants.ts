@@ -1,9 +1,11 @@
-export const EiffelCore = "0x6FB24c8523e6Dd6cCCa0403F94dc7b84233BdeF3"
+export const Eiffel="0x0A0d5eFCeb3842b408f5eF803C1B2a6777f6d671"
+export const EiffelCore = "0x9b3ADc1c4317F0497e75A6CBBCcc14a40126ba0A"
 export const USDT = "0x175bfeFc1252F752c839246a24ADbAF39B69F59a"
 export const rpc = "https://data-seed-prebsc-1-s1.bnbchain.org:8545"
 export const Pair = "0xF90F6173ceC7356C75F43d8BB91bF4fd96F36B46"
 export const explore = "https://testnet.bscscan.com"
 export const host = "http://localhost:3000/"
+export const maximumAllowance = "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
 /* export const host = "http://159.75.179.49:3001/" */
 
 /* const AMSNFTCore = "0x8039270004B6eDaA32057afFfE380c3659B0182C"

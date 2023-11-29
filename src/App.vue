@@ -2,9 +2,13 @@
 
 <template>
     <div>
-        <van-overlay :show="store.isLoading">
+        <van-overlay :show="store.isLoading" z-index="10000">
             <div class="flex items-center justify-center h-full" @click.stop>
-                <van-loading></van-loading>
+                <div class="text-center">
+                    <div class="mb-2">{{ store.loadingText }}</div>
+                    <van-loading></van-loading>
+                </div>
+
             </div>
         </van-overlay>
         <div>
@@ -22,7 +26,7 @@
 import NavTop from "@/components/nav-top.vue";
 import MainMenu from "@/components/main-menu.vue"
 import { useRoute } from "vue-router"
-import { useSign } from "./hooks/useEiffel";
+import { useSign } from "./hooks/useEiffelCore";
 import { useRegister } from "./hooks/useApi"
 import { useResolveSearchParams } from "@/hooks/useUtils"
 import { watch, computed } from "vue";
@@ -40,8 +44,8 @@ const register = () => {
     useRegister(store.account, store.inviter, store.signHash)
 }
 const sign = async () => {
-    const hash = await useSign(store.account)
-    store.signHash = hash
+    /*    const hash = await useSign(store.account)
+       store.signHash = hash */
     register()
 }
 watch(() => {

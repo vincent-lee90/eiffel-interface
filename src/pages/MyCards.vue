@@ -15,10 +15,16 @@
         </div>
 
         <div class="mt-12 text-center" v-if="activeTab == 'myCards'">
-            <van-button type="primary" square class="w-[200px]" @click="confirmSellCard">出售选中</van-button>
+            <div class="mb-4 w-[200px] mx-auto" v-if="isShowApproveButton">
+                <ApproveButton class="w-full" :token-address="Eiffel" :spender="EiffelCore" :name="'Eiffel'"
+                    @approved="isShowApproveButton = false" />
+            </div>
+            <div v-else>
+                <van-button type="primary" square class="w-[200px]" @click="confirmSellCard">出售选中</van-button>
+            </div>
         </div>
     </div>
-    <van-dialog v-model:show="isShowConfirm" show-cancel-button @confirm="sellCard">
+    <van-dialog v-model:show="isShowConfirm" show-cancel-button @confirm="payForSell">
         <div class="py-8 px-4">
             <div class="mb-4">确认售出？</div>
             <div class="flex justify-between items-center mb-4">
@@ -45,11 +51,16 @@
 import CardList from "@/components/cards-list.vue"
 import ExCardsList from "@/components/ex-cards-list.vue";
 import { ref } from "vue"
-import { useSell } from "@/hooks/useApi";
-import { store } from "@/hooks/store"
+import { usePreSell, useSell } from "@/hooks/useApi";
+import { useCheckAllowance } from "@/hooks/useErc20"
+import { store, useCloseLoading, useShowLoading } from "@/hooks/store"
 import { showNotify } from "vant"
 import { IconUSDT } from "@/icons";
-
+import ApproveButton from "@/components/approve-button.vue";
+import { Eiffel, EiffelCore } from "@/presets/constants";
+import { usePayForSell } from "@/hooks/useEiffelCore";
+import { ZeroAddress } from "ethers";
+const isShowApproveButton = ref(false)
 const activeTab = ref("myCards")
 const tabToggle = (tab: string) => {
     activeTab.value = tab
@@ -63,6 +74,41 @@ const confirmSellCard = () => {
     if (selectCard) {
         isShowConfirm.value = true
     }
+}
+const payForSell = async () => {
+    useShowLoading()
+    try {
+        const res = await usePreSell(store.account, selectCard.cardId)
+        if (!res.isSuccessful) {
+            res.message && showNotify({ type: "danger", message: res.message })
+            return useCloseLoading()
+        }
+        if (res.isSuccessful) {
+            let { seller, cardId, totalFeeAmount, message, seed, signature, inviter } = res.data
+            const hasApproved = await useCheckAllowance(totalFeeAmount, Eiffel, store.account, EiffelCore)
+            if (!hasApproved) {
+                showNotify({ type: "warning", message: "请先授权" })
+                isShowApproveButton.value = true
+                useCloseLoading()
+                return
+            }
+            const feeTo = EiffelCore
+            inviter = inviter ? inviter : ZeroAddress
+            store.loadingText = "支付中"
+            const tx = await usePayForSell(seller, cardId, inviter, totalFeeAmount, feeTo, message, seed, signature)
+            store.loadingText = "正在确认交易，请勿关闭"
+            await tx.wait()
+            store.loadingText = "正在售出，请勿关闭"
+            await sellCard()
+        } else {
+            showNotify({ type: "danger", message: res.message })
+            useCloseLoading()
+        }
+    } catch (e) {
+        console.log(e)
+        useCloseLoading()
+    }
+
 }
 const cardListRef = ref<any>()
 const sellCard = async () => {
@@ -81,8 +127,6 @@ const sellCard = async () => {
         showNotify({ type: "danger", message: "未知错误" })
         console.log(e)
     }
-
-
 }
 </script>
 <style scoped>

@@ -1,5 +1,5 @@
 <template>
-    <div class="px-2 pt-[60px] pb-[62px]">
+    <div class="px-2 pt-[60px] pb-[80px]">
         <div class="game-container"><van-notice-bar left-icon="volume-o" :scrollable="false">
                 <van-swipe vertical class="notice-swipe" :autoplay="3000" :touchable="false" :show-indicators="false">
                     <van-swipe-item>0x4f4548...eB8 获得1.5倍算力</van-swipe-item>
@@ -7,8 +7,11 @@
                     <van-swipe-item>0x4f4548...eB8 获得3.5倍算力</van-swipe-item>
                 </van-swipe>
             </van-notice-bar></div>
-        <div class="text-xl py-4">我的卡牌</div>
-        <div class="w-full h-[62vh] overflow-y-auto border border-color2nd border-solid py-2 px-2 rounded-2xl">
+        <div class="text-xl py-4 flex justify-between items-end">
+            <div>盲盒游戏</div>
+            <div class="text-slate-400 text-xs">我的卡牌</div>
+        </div>
+        <div class="w-full h-[55vh] overflow-y-auto border border-color2nd border-solid py-2 px-2 rounded-2xl">
             <CardList @on-select-card="handleSelectCard" ref="cardListRef" />
         </div>
         <div class="mt-12 text-center">

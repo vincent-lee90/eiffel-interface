@@ -1,30 +1,21 @@
 <template>
     <div class="pt-[60px] ">
-        <div class="text-center text-[50px] pt-32 px-4  first">
+        <div class="text-center text-[50px] pt-32 px-4  first h-[calc(100vh-60px)]">
             <div>
                 <div>探索</div>
                 <div>购买或出售</div>
                 <div class="default-gradient">Best NFTs!</div>
             </div>
-            <div class="mt-8 flex flex-col items-center">
+            <div class="mt-8 flex flex-col items-center pb-32">
                 <div class="w-[160px]">
                     <van-button type="primary" block square @click="goTo('exchange')">探索</van-button>
                 </div>
                 <div class="w-[160px] mt-4">
                     <van-button plain block square @click="goTo('mint')">铸造</van-button>
                 </div>
-
-            </div>
-            <div>
-                <div class="pb-32 mt-16 w-[256px] mx-auto shadow-lg">
-                    <img src="/nfts/nft-example.png" class="w-[256px] h-[256px]" />
-                    <div class="bg-white text-black text-xl p-4 flex items-center justify-center">
-                        拥有者：@Eiffel
-                    </div>
-                </div>
             </div>
         </div>
-        <div class="px-4 introduce-section">
+        <div class="px-4 introduce-section  h-[calc(100vh-60px)]">
             <div class=" px-2 min-h-[400px] rounded-xl pt-48 pb-16">
                 <div class="text-[25px] default-gradient mb-4">巴黎数藏</div>
                 <div class="mb-4">
@@ -123,9 +114,9 @@
 <script setup lang="ts">
 import { IconSplit, IconGame } from '@/icons';
 import { useRouter } from 'vue-router';
-const router=useRouter()
-const goTo=(_n:string)=>{
-    router.push({name:_n})
+const router = useRouter()
+const goTo = (_n: string) => {
+    router.push({ name: _n })
 }
 </script>
 <style scoped>

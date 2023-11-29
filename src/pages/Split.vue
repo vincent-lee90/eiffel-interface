@@ -1,6 +1,9 @@
 <template>
-    <div class="pt-[60px] pb-[62px] px-2">
-        <div class="text-xl py-4">我的卡牌</div>
+    <div class="pt-[60px] pb-[80px] px-2">
+        <div class="text-xl py-4 flex justify-between items-end">
+            <div>卡牌拆分</div>
+            <div class="text-slate-400 text-xs">我的卡牌</div>
+        </div>
         <div class="w-full h-[62vh] overflow-y-auto border border-color2nd border-solid py-2 px-2 rounded-2xl">
             <CardsList @on-select-card="handleSelectCard" ref="cardsListRef" />
         </div>
