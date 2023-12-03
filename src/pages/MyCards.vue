@@ -1,16 +1,25 @@
 <template>
     <div class="px-2 pt-[60px] pb-[62px]">
         <div class="py-4 flex items-center justify-end">
-            <div class="px-2 cus-tab" :class="{ 'active': activeTab == 'myCards' }" @click="tabToggle('myCards')">我的卡牌</div>
-            <div class="px-2 cus-tab" :class="{ 'active': activeTab != 'myCards' }" @click="tabToggle('mySaleList')">售卖中
+            <div class="px-2 cus-tab" :class="{ 'active': activeTab == 'myCards' }" @click="tabToggle('myCards')">
+                我的卡牌
+            </div>
+            <div class="px-2 cus-tab" :class="{ 'active': activeTab == 'mySaleList' }" @click="tabToggle('mySaleList')">
+                售卖中
+            </div>
+            <div class="px-2 cus-tab" :class="{ 'active': activeTab == 'myBuyingList' }" @click="tabToggle('myBuyingList')">
+                购买中
             </div>
         </div>
         <div class="w-full h-[62vh] overflow-y-auto border border-color2nd border-solid py-2 px-2 rounded-2xl">
             <div v-if="activeTab == 'myCards'">
                 <CardList @on-select-card="handleSelectCard" ref="cardListRef" />
             </div>
-            <div v-else>
+            <div v-else-if="activeTab == 'mySaleList'">
                 <ExCardsList />
+            </div>
+            <div v-else="activeTab == 'myBuyingList'">
+                <BuyingCardList />
             </div>
         </div>
 
@@ -60,6 +69,7 @@ import ApproveButton from "@/components/approve-button.vue";
 import { Eiffel, EiffelCore } from "@/presets/constants";
 import { usePayForSell } from "@/hooks/useEiffelCore";
 import { ZeroAddress } from "ethers";
+import BuyingCardList from "@/components/buying-card-list.vue";
 const isShowApproveButton = ref(false)
 const activeTab = ref("myCards")
 const tabToggle = (tab: string) => {

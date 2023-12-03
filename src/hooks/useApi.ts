@@ -52,6 +52,16 @@ export const useExchangeList = async (pageIndex: number, pageSize: number): Prom
 export const useMyExchangeList = async (address: string) => {
     const res = await axios.get(Urls.myExchangeList, { params: { address } })
     res.data.cards = res.data.cards.map((el: any) => {
+        el.worthUint = el.worth
+        el.worth = ethers.formatEther(el.worth)
+        return el
+    })
+    return res as unknown as ApiResponse
+}
+export const useMyBuyingList = async (address: string) => {
+    const res = await axios.get(Urls.myBuyingList, { params: { address } })
+    res.data.cards = res.data.cards.map((el: any) => {
+        el.worthUint = el.worth
         el.worth = ethers.formatEther(el.worth)
         return el
     })
@@ -102,5 +112,9 @@ export const useRewardInfo = async (address: string): Promise<ApiResponse> => {
 }
 export const useClaimHashrateReward = async (address: string): Promise<ApiResponse> => {
     const res = await axios.get(Urls.claimHashrateReward, { params: { address } })
+    return res as unknown as ApiResponse
+}
+export const useClaimTeamReward = async (address: string): Promise<ApiResponse> => {
+    const res = await axios.get(Urls.claimTeamReward, { params: { address } })
     return res as unknown as ApiResponse
 }

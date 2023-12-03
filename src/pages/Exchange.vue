@@ -7,7 +7,6 @@
             <van-list class="grid grid-cols-2 gap-x-4 gap-y-8" finished-text="已经到底了" :finished="isLastPage"
                 @load="getExchangeList">
                 <van-cell class="relative" v-for="item in exCards">
-
                     <div class=" flex justify-between items-center bg-white/10 backdrop-blur py-2 px-2 rounded-full">
                         <div class="text-left">#{{ item.cardId }}</div>
                         <div class="flex justify-end items-center">
@@ -130,6 +129,10 @@ const payForBuy = async () => {
             if (buyRes.isSuccessful) {
                 cancelConfirm()
                 useCloseLoading()
+                const boughtCardId = buyRes.data
+                exCards.value = exCards.value.filter((card) => {
+                    return card.cardId != boughtCardId
+                })
                 showToast("购买成功")
             } else {
                 cancelConfirm()
@@ -168,9 +171,6 @@ const cancelConfirm = () => {
     selectExchangeCard = null
     isShowConfirm.value = false
 }
-/* onMounted(() => {
-    getExchangeList()
-}) */
 </script>
 <style scoped>
 .van-cell {

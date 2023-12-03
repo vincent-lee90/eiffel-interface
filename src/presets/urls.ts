@@ -8,12 +8,14 @@ export default class Urls {
     static myCards = `users/myCards`
     static split = `split/split-card`
     static splitLog = `split/split-log`
-    static preSell=`exchange/preSell`
+    static preSell = `exchange/preSell`
     static sell = `exchange/sell`
-    static preBuy=`exchange/preBuy`
+    static preBuy = `exchange/preBuy`
     static buy = `exchange/buy`
     static exchangeList = `exchange/list`
     static playGame = `game/play`
-    static myExchangeList = `exchange/myList`
-    static claimHashrateReward=`users/claimHashrateReward`
+    static myExchangeList = `exchange/mySellingList`
+    static myBuyingList = `exchange/myBuyingList`
+    static claimHashrateReward = `users/claimHashrateReward`
+    static claimTeamReward = `users/claimTeamReward`
 }
