@@ -84,7 +84,7 @@
                     <div>卡牌价值大于500USDT</div>
                 </div>
                 <div class="text-center mt-8">
-                    <van-button round plain class="w-[180px]" @click="goTo('game')">开始游戏</van-button>
+                    <van-button round plain class="w-[180px]">开始游戏</van-button>
                 </div>
                 <div class="relative w-full h-[120px] text-center  mt-8 overflow-hidden">
                     <div

@@ -10,7 +10,7 @@
                     </div>
                     <IconChecked class="w-[14px] h-[14px] fill-green-500" v-show="selectedCard == card.cardId" />
                 </div>
-                <img :src="card.imgUrl" class="w-full" />
+                <van-image :src="card.imgUrl" width="100%"></van-image>
             </van-cell>
         </van-list>
     </div>
@@ -22,8 +22,8 @@ import { useGetCards } from "@/hooks/useApi"
 import { store } from "@/hooks/store";
 const emits = defineEmits(["onSelectCard"])
 const cards = ref<any[]>([])
-const isLoading = ref(false)
-const isLastPage = ref(true)
+const isLoading = ref(true)
+const isLastPage = ref(false)
 const getMyCards = async () => {
     isLoading.value = true
     const res = await useGetCards(store.account)
@@ -31,6 +31,7 @@ const getMyCards = async () => {
     _cards.map((card: any) => {
         cards.value.push(card)
     })
+    isLastPage.value = true
     isLoading.value = false
 }
 const selectedCard = ref('')

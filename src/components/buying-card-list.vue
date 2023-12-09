@@ -10,7 +10,7 @@
                         <IconUSDT class="w-[14px] h-[14px]" /><span class="ml-1 text-black">{{ card.worth }}U</span>
                     </div>
                 </div>
-                <img :src="card.imgUrl" class="w-full" />
+                <van-image :src="card.imgUrl" width="100%"></van-image>
                 <div class="p-4 text-center">
                     <van-button v-if="!isShowApproveButton" type="primary" square @click="payForBuy(card)">
                         立即支付
@@ -34,7 +34,7 @@ import { usePayForBuy } from "@/hooks/useEiffelCore";
 const emits = defineEmits(["onSelectCard"])
 const cards = ref<any[]>([])
 const isLoading = ref(false)
-const isLastPage = ref(true)
+const isLastPage = ref(false)
 const isShowApproveButton = ref(false)
 const getMyCards = async () => {
     isLoading.value = true
@@ -43,6 +43,7 @@ const getMyCards = async () => {
     _cards.map((card: any) => {
         cards.value.push(card)
     })
+    isLastPage.value = true
     isLoading.value = false
 }
 const init = () => {

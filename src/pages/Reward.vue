@@ -2,16 +2,16 @@
     <div>
         <div class="px-2 pt-[60px] pb-[62px]">
             <div class="py-4">
-                <div>开公司流水奖励（总团队）</div>
+                <div>开公司流水奖励（总团队)</div>
                 <div class="text-right">
-                    {{ teamCoRewardAmount }}
+                    {{ teamCoRewardAmount }}<span class="ml-2">Eiffel</span>
                 </div>
             </div>
             <van-divider />
             <div class="py-4">
                 <div>商群扶持（总团队）</div>
                 <div class="text-right">
-                    {{ teamGroupRewardAmount }}
+                    {{ teamGroupRewardAmount }}<span class="ml-2">Eiffel</span>
                 </div>
             </div>
             <van-divider />
@@ -20,7 +20,7 @@
                     今日流水(我的团队)
                 </div>
                 <div class="text-right">
-                    {{ exAmount }}
+                    {{ exAmount }}<span class="ml-2">USDT</span>
                 </div>
             </div>
             <van-divider />
@@ -29,7 +29,7 @@
                     可领取代币
                 </div>
                 <div class="text-right">
-                    {{ parseFloat(myCoRewardAmount) + parseFloat(myGroupRewardAmount) }}
+                    {{ parseFloat(myCoRewardAmount) + parseFloat(myGroupRewardAmount) }}<span class="ml-2">Eiffel</span>
                 </div>
                 <div class="text-center mt-16">
                     <van-button type="primary" class="w-1/3" square @click="toConfirmClaim">领取奖励</van-button>

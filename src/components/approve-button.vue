@@ -4,7 +4,7 @@
 <script setup lang="ts">
 import { maximumAllowance } from '@/presets/constants'
 import { useApprove } from '@/hooks/useErc20';
-import { showNotify } from "vant"
+import { showNotify, showToast } from "vant"
 import { computed } from 'vue'
 import { store } from '@/hooks/store';
 const props = defineProps(["tokenAddress", "name", "spender"])
@@ -18,7 +18,7 @@ const approve = async () => {
         const tx = await useApprove(props.tokenAddress, props.spender, maximumAllowance)
         await tx.wait()
         emits("approved")
-        showNotify({ type: "success", message: `授权成功,${tx.hash}` })
+        showToast({ type: "success", message: `授权成功,${tx.hash}` })
         store.isLoading = false
     } catch (e) {
         store.isLoading = false

@@ -62,11 +62,13 @@ const type3Amount = ref(0)
 const type4Amount = ref(0)
 const isShowApproveButton = ref(false)
 const getMintStatics = async () => {
+    useShowLoading()
     const res = await useMintStatics()
     type1Amount.value = res.data.first
     type2Amount.value = res.data.second
     type3Amount.value = res.data.third
     type4Amount.value = res.data.fourth
+    useCloseLoading()
 }
 const toConfirmMint = () => {
     isShowConfirm.value = true

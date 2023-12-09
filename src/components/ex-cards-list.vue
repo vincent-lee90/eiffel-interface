@@ -10,7 +10,7 @@
                         <IconUSDT class="w-[14px] h-[14px]" /><span class="ml-1 text-black">{{ card.worth }}U</span>
                     </div>
                 </div>
-                <img :src="card.imgUrl" class="w-full" />
+                <van-image :src="card.imgUrl" width="100%"></van-image>
             </van-cell>
         </van-list>
     </div>
@@ -23,7 +23,7 @@ import { store } from "@/hooks/store";
 const emits = defineEmits(["onSelectCard"])
 const cards = ref<any[]>([])
 const isLoading = ref(false)
-const isLastPage = ref(true)
+const isLastPage = ref(false)
 const getMyCards = async () => {
     isLoading.value = true
     const res = await useMyExchangeList(store.account)
@@ -31,6 +31,7 @@ const getMyCards = async () => {
     _cards.map((card: any) => {
         cards.value.push(card)
     })
+    isLastPage.value = true
     isLoading.value = false
 }
 const init = () => {

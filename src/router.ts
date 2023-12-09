@@ -8,6 +8,7 @@ import More from "@/pages/More.vue"
 import MyCards from "@/pages/MyCards.vue"
 import Reward from "@/pages/Reward.vue"
 import Hashrate from "@/pages/Hashrate.vue"
+import { store } from "./hooks/store"
 const routes = [
     {
         path: "/", redirect: { name: 'index' }
@@ -16,13 +17,23 @@ const routes = [
     }, {
         path: "/exchange", component: Exchange, name: "exchange"
     }, {
-        path: "/split", component: Split, name: "split"
+        path: "/split", component: Split, name: "split", beforeEnter: () => {
+            return !!store.signHash
+        }
     }, {
-        path: "/mint", component: Mint, name: "mint"
+        path: "/mint", component: Mint, name: "mint", beforeEnter: () => {
+            return !!store.signHash
+        }
     }, {
         path: "/game", component: Game, name: "game"
+        , beforeEnter: () => {
+            return !!store.signHash
+        }
     }, {
         path: "/more", component: More, name: "more"
+        , beforeEnter: () => {
+            return !!store.signHash
+        }
     }, {
         path: "/my-cards", component: MyCards, name: "myCards"
     }, {

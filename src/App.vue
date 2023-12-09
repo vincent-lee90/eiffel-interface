@@ -30,6 +30,7 @@ import { useRegister } from "./hooks/useApi"
 import { useResolveSearchParams } from "@/hooks/useUtils"
 import { watch, computed } from "vue";
 import { store } from "@/hooks/store"
+import { useSign } from "./hooks/useEiffelCore";
 const isShowNavTop = computed(() => {
     const name = useRoute().name
     const includeNames = ["index", "exchange", "split", "mint", "game", "hashrate", "myCards"]
@@ -43,8 +44,8 @@ const register = () => {
     useRegister(store.account, store.inviter, store.signHash)
 }
 const sign = async () => {
-    /*    const hash = await useSign(store.account)
-       store.signHash = hash */
+    const hash = await useSign(store.account)
+    store.signHash = hash
     register()
 }
 watch(() => {

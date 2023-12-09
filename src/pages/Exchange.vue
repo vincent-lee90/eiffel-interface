@@ -5,7 +5,7 @@
         </div>
         <div class="h-[75vh] overflow-y-auto">
             <van-list class="grid grid-cols-2 gap-x-4 gap-y-8" finished-text="已经到底了" :finished="isLastPage"
-                @load="getExchangeList">
+                @load="getExchangeList" v-model:loading="listLoading">
                 <van-cell class="relative" v-for="item in exCards">
                     <div class=" flex justify-between items-center bg-white/10 backdrop-blur py-2 px-2 rounded-full">
                         <div class="text-left">#{{ item.cardId }}</div>
@@ -14,7 +14,8 @@
                         </div>
                     </div>
                     <div>
-                        <img :src="item.imgUrl" class="w-full" />
+                        <van-image :src="item.imgUrl" width="100%"></van-image>
+                        <!-- <img :src="item.imgUrl" class="w-full" /> -->
                     </div>
                     <div class="bg-white text-black  py-4 px-2">
                         <div class="flex justify-between items-center mb-2">
@@ -84,10 +85,12 @@ const exCards = ref<any[]>([])
 let pageIndex = 1
 const pageSize = 10
 const isLastPage = ref<boolean>(false)
+const listLoading = ref(false)
 const getExchangeList = async () => {
     if (isLastPage.value) {
         return
     }
+    listLoading.value = true
     const res = await useExchangeList(pageIndex, pageSize)
     isLastPage.value = res.data.isLastPage
     const cards = res.data.cards
@@ -95,6 +98,7 @@ const getExchangeList = async () => {
         exCards.value.push(card)
     })
     pageIndex++
+    listLoading.value = false
 }
 
 let selectExchangeCard: any = null

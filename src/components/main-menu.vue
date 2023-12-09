@@ -9,15 +9,16 @@
         <div @click="goTo('split')" :class="{ 'active': activeRouteName == 'split' }">
             <IconSplit class="w-[25px] h-[25px]" />
         </div>
-        <div @click="goTo('game')" :class="{ 'active': activeRouteName == 'game' }">
+<!--         <div @click="goTo('game')" :class="{ 'active': activeRouteName == 'game' }">
             <IconGame class="w-[25px] h-[25px]" />
-        </div>
+        </div> -->
         <div @click="goTo('more')" :class="{ 'active': activeRouteName == 'more' }">
             <IconMore class="w-[25px] h-[25px]" />
         </div>
     </div>
 </template>
 <script setup lang="ts">
+//@ts-ignore
 import { IconHome, IconNFT, IconSplit, IconGame, IconMore } from '@/icons';
 import { useRoute, useRouter } from 'vue-router';
 import { computed } from "vue"
