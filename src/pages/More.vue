@@ -30,16 +30,39 @@
                 </div>
             </van-button>
         </div>
+        <div class="mt-16">
+            <div class="mt-4 flex justify-between items-center">
+                <div>所属团队</div>
+                <div>{{ top.substring(0, 3) + '...' + top.substring(top.length - 4,
+                    top.length) }}</div>
+            </div>
+            <div class="mt-4 flex justify-between items-center">
+                <div>我的邀请者（直接上级）</div>
+                <div v-if="inviter">{{ inviter.substring(0, 3) + '...' + inviter.substring(inviter.length - 4,
+                    inviter.length) }}</div>
+            </div>
+            <div class="mt-4">
+                <div class="flex items-center justify-between">
+                    <div>我的受邀者（直推）总人数</div>
+                    <div><span>{{ invitees.length }}</span></div>
+                </div>
+                <div class="py-8">
+                    <div class="text-right mb-2" v-for="(invitee, index) in invitees" :key="index">{{ invitee.substring(0,
+                        3) + '...' + invitee.substring(invitee.length - 4, invitee.length) }}</div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script setup lang="ts">
 import Avatar from "@/components/avatar.vue"
 import { IconMint, IconCard, IconHashrate, IconReward, IconCopy } from "@/icons"
 import { useRouter } from "vue-router"
-import { store } from "@/hooks/store"
-import { computed, onBeforeUnmount } from "vue"
+import { store, useCloseLoading, useShowLoading } from "@/hooks/store"
+import { computed, onBeforeUnmount, onMounted, ref } from "vue"
 import ClipboardJS from 'clipboard'
 import { showSuccessToast, showFailToast } from 'vant';
+import { useMemberInfo } from "@/hooks/useApi"
 
 
 const router = useRouter()
@@ -65,6 +88,36 @@ const copyInviteUrl = () => {
 onBeforeUnmount(() => {
     // 销毁 ClipboardJS
     clipboard && clipboard.destroy()
+})
+const inviter = ref("")
+const invitees = ref<any[]>([])
+const top = ref("")
+const getMemberInfo = async () => {
+    try {
+        useShowLoading()
+        const res = await useMemberInfo(store.account)
+        if (res.isSuccessful) {
+            if (res.data.member.inviter) {
+                inviter.value = res.data.member.inviter
+            }
+            if (res.data.member.invitees) {
+                console.log(res.data.member.invitees)
+                invitees.value = res.data.member.invitees.split(",")
+            }
+            top.value = res.data.member.top
+        } else {
+            showFailToast(res.message);
+        }
+        useCloseLoading()
+    } catch (e) {
+        console.log(e)
+        useCloseLoading()
+        showFailToast('获取用户信息失败');
+    }
+
+}
+onMounted(() => {
+    getMemberInfo()
 })
 </script>
 <style scoped>

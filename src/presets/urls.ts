@@ -18,4 +18,5 @@ export default class Urls {
     static myBuyingList = `exchange/myBuyingList`
     static claimHashrateReward = `users/claimHashrateReward`
     static claimTeamReward = `users/claimTeamReward`
+    static memberInfo=`users/memberInfo`
 }

@@ -118,3 +118,7 @@ export const useClaimTeamReward = async (address: string): Promise<ApiResponse> 
     const res = await axios.get(Urls.claimTeamReward, { params: { address } })
     return res as unknown as ApiResponse
 }
+export const useMemberInfo = async (address: string): Promise<ApiResponse> => {
+    const res = await axios.get(Urls.memberInfo, { params: { address } })
+    return res as unknown as ApiResponse
+}
