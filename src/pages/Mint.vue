@@ -86,7 +86,7 @@ const payForMint = async () => {
     let cardId: string;
     if (res.isSuccessful) {
         cardId = res.data.card.cardId
-        mint(cardId)
+        await mint(cardId)
     } else {
         useCloseLoading()
         showNotify({ type: "danger", message: res.message })
