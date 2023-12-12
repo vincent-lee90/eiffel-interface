@@ -16,5 +16,6 @@ export const rpc = "https://rpc.ankr.com/bsc"
 export const Pair = "0xa37882BFdcFE472a04C143D17d7ac7600bFad1F0"
 export const explore = "https://bscscan.com/"
 export const maximumAllowance = "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
-export const host = "https://108.174.196.57:3000/"
+export const host = "api"
+/* export const host = "https://localhost:3000" */
 
