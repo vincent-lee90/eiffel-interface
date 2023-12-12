@@ -17,5 +17,5 @@ export const Pair = "0xa37882BFdcFE472a04C143D17d7ac7600bFad1F0"
 export const explore = "https://bscscan.com/"
 export const maximumAllowance = "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
 export const host = "api"
-/* export const host = "https://localhost:3000" */
+/* export const host = "http://localhost:3000" */
 
