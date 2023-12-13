@@ -81,6 +81,10 @@ export const useSell = async (seller: string, cardId: number): Promise<ApiRespon
 /* export const useBuyInfo = async (): Promise<ApiResponse> => {
 
 } */
+export const usePlaceOrder = async (address: string, cardId: number | string) => {
+    const res = await axios.post(Urls.placeOrder, { address, cardId })
+    return res as unknown as ApiResponse
+}
 export const usePreBuy = async (address: string, cardId: number | string) => {
     const res = await axios.get(Urls.preBuy, { params: { address, cardId } })
     return res as unknown as ApiResponse

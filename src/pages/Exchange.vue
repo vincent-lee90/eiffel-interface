@@ -75,7 +75,7 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import { IconUSDT } from "@/icons"
-import { useExchangeList, useBuy, usePreBuy } from "@/hooks/useApi"
+import { useExchangeList, useBuy, usePreBuy, usePlaceOrder } from "@/hooks/useApi"
 import { store, useCloseLoading, useShowLoading } from "@/hooks/store";
 import { showNotify, showToast } from "vant"
 import { usePayForBuy } from "@/hooks/useEiffelCore";
@@ -104,10 +104,23 @@ const getExchangeList = async () => {
 let selectExchangeCard: any = null
 const isShowConfirm = ref(false)
 const isShowApproveButton = ref(false)
-const toConfirmBuy = (exchangeCard: any) => {
+const toConfirmBuy = async (exchangeCard: any) => {
     if (exchangeCard) {
-        selectExchangeCard = exchangeCard
-        isShowConfirm.value = true
+        try {
+            useShowLoading()
+            const res = await usePlaceOrder(store.account, exchangeCard.cardId)
+            if (res.isSuccessful) {
+                selectExchangeCard = exchangeCard
+                isShowConfirm.value = true
+            } else {
+                showNotify({ type: "danger", message: res.message })
+            }
+            useCloseLoading()
+        } catch (e) {
+            console.log(e)
+            showNotify({ type: "danger", message: "下单失败" })
+            useCloseLoading()
+        }
     }
 
 }

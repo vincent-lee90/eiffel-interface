@@ -16,6 +16,13 @@ export const rpc = "https://rpc.ankr.com/bsc"
 export const Pair = "0xa37882BFdcFE472a04C143D17d7ac7600bFad1F0"
 export const explore = "https://bscscan.com/"
 export const maximumAllowance = "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
-export const host = "api"
-/* export const host = "http://localhost:3000" */
-
+const mode = import.meta.env.MODE
+let _host
+if (mode == "production") {
+    _host = "api"
+} else if (mode == "development") {
+    _host = "http://159.75.179.49:3000"
+} else if (mode == "test") {
+    _host = "http://159.75.179.49:3000"
+}
+export const host = _host

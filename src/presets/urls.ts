@@ -10,6 +10,7 @@ export default class Urls {
     static splitLog = `split/split-log`
     static preSell = `exchange/preSell`
     static sell = `exchange/sell`
+    static placeOrder=`exchange/placeOrder`
     static preBuy = `exchange/preBuy`
     static buy = `exchange/buy`
     static exchangeList = `exchange/list`
