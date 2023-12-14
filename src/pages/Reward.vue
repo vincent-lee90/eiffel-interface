@@ -4,14 +4,14 @@
             <div class="py-4">
                 <div>开公司流水奖励（总团队)</div>
                 <div class="text-right">
-                    {{ teamCoRewardAmount }}<span class="ml-2">Eiffel</span>
+                    {{ parseFloat(teamCoRewardAmount).toFixed(2) }}<span class="ml-2">Eiffel</span>
                 </div>
             </div>
             <van-divider />
             <div class="py-4">
                 <div>商群扶持（总团队）</div>
                 <div class="text-right">
-                    {{ teamGroupRewardAmount }}<span class="ml-2">Eiffel</span>
+                    {{ parseFloat(teamGroupRewardAmount).toFixed(2) }}<span class="ml-2">Eiffel</span>
                 </div>
             </div>
             <van-divider />
@@ -20,7 +20,25 @@
                     今日流水(我的团队)
                 </div>
                 <div class="text-right">
-                    {{ exAmount }}<span class="ml-2">USDT</span>
+                    {{ parseFloat(exAmount).toFixed(2) }}<span class="ml-2">USDT</span>
+                </div>
+            </div>
+            <van-divider />
+            <div class="py-4">
+                <div>
+                    今日我的开公司奖励
+                </div>
+                <div class="text-right">
+                    {{ parseFloat(myCoRewardAmount).toFixed(2) }}<span class="ml-2">Eiffel</span>
+                </div>
+            </div>
+            <van-divider />
+            <div class="py-4">
+                <div>
+                    今日我的商群奖励
+                </div>
+                <div class="text-right">
+                    {{ parseFloat(myGroupRewardAmount).toFixed(2) }}<span class="ml-2">Eiffel</span>
                 </div>
             </div>
             <van-divider />
@@ -29,7 +47,8 @@
                     可领取代币
                 </div>
                 <div class="text-right">
-                    {{ parseFloat(myCoRewardAmount) + parseFloat(myGroupRewardAmount) }}<span class="ml-2">Eiffel</span>
+                    {{ (parseFloat(myCoRewardAmount) + parseFloat(myGroupRewardAmount)).toFixed(2) }}<span
+                        class="ml-2">Eiffel</span>
                 </div>
                 <div class="text-center mt-16">
                     <van-button type="primary" class="w-1/3" square @click="toConfirmClaim">领取奖励</van-button>

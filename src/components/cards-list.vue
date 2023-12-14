@@ -6,7 +6,7 @@
                 <div class="flex justify-between items-center mb-2 px-2">
                     <div class="text-slate-400">#{{ card.cardId }}</div>
                     <div class="flex justify-end items-center">
-                        <IconUSDT class="w-[14px] h-[14px]" /><span class="ml-1 text-black">{{ card.worth }}U</span>
+                        <IconUSDT class="w-[14px] h-[14px]" /><span class="ml-1 text-black">{{ parseFloat(card.worth).toFixed(2) }}U</span>
                     </div>
                     <IconChecked class="w-[14px] h-[14px] fill-green-500" v-show="selectedCard == card.cardId" />
                 </div>

@@ -10,7 +10,8 @@
                     <div class=" flex justify-between items-center bg-white/10 backdrop-blur py-2 px-2 rounded-full">
                         <div class="text-left">#{{ item.cardId }}</div>
                         <div class="flex justify-end items-center">
-                            <IconUSDT class="w-[14px] h-[14px]" /><span class="ml-1 text-slate-600">{{ item.worth }}U</span>
+                            <IconUSDT class="w-[14px] h-[14px]" /><span class="ml-1 text-slate-600">{{
+                                parseFloat(item.worth).toFixed(2) }}U</span>
                         </div>
                     </div>
                     <div>
